@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raymond Chairman Collection Virtual Store</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #201712;
+      --ivory: #f8efe2;
+      --champagne: #d8b775;
+      --champagne-bright: #f7de9b;
+      --oxblood: #4b1618;
+      --emerald: #163d36;
+      --glass: rgba(20, 15, 11, 0.48);
+      --veil: rgba(11, 9, 8, 0.68);
+      --line: rgba(255, 238, 197, 0.34);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    #codex-browser-sidebar-comments-root {
+      pointer-events: none !important;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow: hidden;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--ink);
+      color: var(--ivory);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      overflow: hidden;
+      background: #0f0c09;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 420ms ease, visibility 420ms ease;
+    }
+
+    .intro.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro__video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .intro::before,
+    .intro::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .intro::before {
+      top: 0;
+      height: 24vh;
+      background: linear-gradient(180deg, rgba(10, 7, 5, 0.66), rgba(10, 7, 5, 0));
+    }
+
+    .intro::after {
+      bottom: 0;
+      height: 34vh;
+      background: linear-gradient(0deg, rgba(10, 7, 5, 0.72), rgba(10, 7, 5, 0));
+    }
+
+    .intro__brand {
+      position: absolute;
+      top: clamp(20px, 4vw, 52px);
+      left: clamp(20px, 5vw, 70px);
+      z-index: 2;
+      display: grid;
+      gap: 6px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .intro__brand span:first-child {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 4vw, 52px);
+      line-height: 0.94;
+    }
+
+    .intro__brand span:last-child {
+      width: fit-content;
+      border-left: 3px solid var(--champagne-bright);
+      padding-left: 10px;
+      color: #ffefc9;
+      font-size: clamp(10px, 1.4vw, 13px);
+      font-weight: 800;
+      letter-spacing: 0.18em;
+    }
+
+    .intro__enter {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: clamp(58px, 6.5vw, 78px);
+      height: clamp(58px, 6.5vw, 78px);
+      border: 1px solid rgba(255, 239, 195, 0.72);
+      border-radius: 999px;
+      padding: 0;
+      background: rgba(75, 22, 24, 0.86);
+      color: #fff4d7;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.34), inset 0 0 0 7px rgba(255, 244, 215, 0.08);
+      transition: opacity 260ms ease, background 180ms ease, transform 180ms ease;
+    }
+
+    .intro__enter::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border: 1px solid rgba(255, 239, 195, 0.58);
+      border-radius: inherit;
+      animation: pulse 1.7s ease-out infinite;
+    }
+
+    .intro__enter svg {
+      position: relative;
+      z-index: 1;
+      width: clamp(26px, 3vw, 34px);
+      height: clamp(26px, 3vw, 34px);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transform: translateX(2px);
+    }
+
+    .intro__enter-tip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 16px);
+      width: max-content;
+      max-width: min(260px, calc(100vw - 36px));
+      border: 1px solid rgba(255, 239, 195, 0.48);
+      padding: 8px 11px;
+      background: rgba(22, 16, 12, 0.88);
+      color: #fff4d7;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, 8px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .intro__enter-tip::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      width: 9px;
+      height: 9px;
+      border-right: 1px solid rgba(255, 239, 195, 0.48);
+      border-bottom: 1px solid rgba(255, 239, 195, 0.48);
+      background: rgba(22, 16, 12, 0.88);
+      transform: translate(-50%, -5px) rotate(45deg);
+    }
+
+    .intro.is-ended .intro__enter {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .intro__enter:hover,
+    .intro__enter:focus-visible {
+      background: rgba(99, 31, 30, 0.94);
+      transform: translate(-50%, -50%) scale(1.05);
+      outline: none;
+    }
+
+    .intro__enter:hover .intro__enter-tip,
+    .intro__enter:focus-visible .intro__enter-tip {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .store {
+      position: relative;
+      width: 100vw;
+      height: 100svh;
+      min-height: 560px;
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--ink);
+    }
+
+    .store__image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .store::before,
+    .store::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .store::before {
+      top: 0;
+      height: 22vh;
+      background: linear-gradient(180deg, rgba(10, 8, 7, 0.62), rgba(10, 8, 7, 0));
+    }
+
+    .store::after {
+      bottom: 0;
+      height: 28vh;
+      background: linear-gradient(0deg, rgba(10, 8, 7, 0.64), rgba(10, 8, 7, 0));
+    }
+
+    .topbar {
+      position: absolute;
+      top: clamp(18px, 3vw, 34px);
+      left: clamp(18px, 4vw, 58px);
+      right: clamp(18px, 4vw, 58px);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 5px;
+      text-transform: uppercase;
+    }
+
+    .brand__name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(20px, 3.2vw, 44px);
+      line-height: 0.96;
+      letter-spacing: 0;
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .brand__collection {
+      width: fit-content;
+      border-left: 3px solid var(--champagne-bright);
+      padding-left: 10px;
+      color: #ffefc9;
+      font-size: clamp(10px, 1.4vw, 13px);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.38);
+    }
+
+    .section-tag {
+      max-width: 44vw;
+      border: 1px solid var(--line);
+      padding: 10px 14px;
+      background: rgba(18, 13, 10, 0.34);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff2d3;
+      font-size: clamp(11px, 1.2vw, 14px);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hotspot {
+      --x: 50%;
+      --y: 74%;
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      z-index: 4;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin: -24px 0 0 -24px;
+      border: 1px solid rgba(255, 241, 198, 0.74);
+      border-radius: 999px;
+      background: rgba(36, 21, 12, 0.42);
+      box-shadow: 0 0 0 1px rgba(91, 31, 28, 0.24), 0 16px 36px rgba(0, 0, 0, 0.32);
+      color: var(--ink);
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .hotspot::before,
+    .hotspot::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .hotspot::before {
+      inset: 8px;
+      background: var(--champagne-bright);
+      box-shadow: inset 0 0 0 4px #6d201c, 0 0 24px rgba(255, 225, 154, 0.78);
+    }
+
+    .hotspot::after {
+      inset: -8px;
+      border: 1px solid rgba(255, 235, 176, 0.62);
+      opacity: 0.72;
+      animation: pulse 1.7s ease-out infinite;
+    }
+
+    .hotspot:hover,
+    .hotspot:focus-visible {
+      transform: scale(1.06);
+      border-color: #fff2cb;
+      background: rgba(75, 22, 24, 0.56);
+      outline: none;
+    }
+
+    .hotspot__tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 16px);
+      translate: -50% 6px;
+      display: grid;
+      gap: 6px;
+      width: min(270px, calc(100vw - 36px));
+      border: 1px solid var(--line);
+      padding: 12px 14px;
+      background: rgba(22, 16, 12, 0.9);
+      color: #fff4d7;
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.34);
+      text-align: left;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 170ms ease, translate 170ms ease;
+    }
+
+    .hotspot__tooltip::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      width: 10px;
+      height: 10px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(22, 16, 12, 0.9);
+      transform: translate(-50%, -5px) rotate(45deg);
+    }
+
+    .hotspot__title {
+      color: #fff7de;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 17px;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .hotspot__eyebrow {
+      color: rgba(255, 238, 197, 0.7);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .hotspot__copy {
+      color: rgba(255, 246, 220, 0.86);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.4;
+    }
+
+    .hotspot:hover .hotspot__tooltip,
+    .hotspot:focus-visible .hotspot__tooltip {
+      translate: -50% 0;
+      opacity: 1;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .viewer-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: grid;
+      place-items: center;
+      padding: clamp(12px, 3vw, 34px);
+      background: var(--veil);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease;
+    }
+
+    .viewer-modal.is-open,
+    .viewer-modal:target {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .viewer-modal__panel {
+      width: min(1180px, 100%);
+      max-height: min(820px, 94svh);
+      overflow: hidden;
+      border: 1px solid rgba(248, 226, 170, 0.46);
+      background: #0f0d0c;
+      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.56);
+      transform: translateY(14px) scale(0.985);
+      transition: transform 180ms ease;
+    }
+
+    .viewer-modal.is-open .viewer-modal__panel,
+    .viewer-modal:target .viewer-modal__panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .viewer-modal__bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 64px;
+      border-bottom: 1px solid rgba(248, 226, 170, 0.22);
+      padding: 12px 14px 12px 20px;
+      background: linear-gradient(90deg, rgba(75, 22, 24, 0.86), rgba(22, 61, 54, 0.76));
+    }
+
+    .viewer-modal__title {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .viewer-modal__title span:first-child {
+      color: #fff6da;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(17px, 2vw, 24px);
+      line-height: 1.05;
+    }
+
+    .viewer-modal__title span:last-child {
+      color: rgba(255, 243, 211, 0.76);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .viewer-modal__close {
+      display: grid;
+      place-items: center;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255, 239, 203, 0.48);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff4d7;
+      cursor: pointer;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+
+    .viewer-modal__close:hover,
+    .viewer-modal__close:focus-visible {
+      background: rgba(255, 255, 255, 0.16);
+      transform: scale(1.04);
+      outline: none;
+    }
+
+    .viewer-modal__close svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+    }
+
+    .viewer-modal__stage {
+      position: relative;
+      height: min(70svh, 680px);
+      min-height: 420px;
+      background: #111;
+    }
+
+    .viewer-modal__loader {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      gap: 18px;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(247, 222, 155, 0.16), transparent 28%),
+        linear-gradient(135deg, #19110f, #173b36);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 220ms ease, visibility 220ms ease;
+    }
+
+    .viewer-modal__loader.is-active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .viewer-modal__spinner {
+      width: 58px;
+      height: 58px;
+      border: 2px solid rgba(255, 244, 219, 0.24);
+      border-top-color: var(--champagne-bright);
+      border-radius: 50%;
+      animation: spin 900ms linear infinite;
+    }
+
+    .viewer-modal__loader-text {
+      display: grid;
+      gap: 6px;
+      color: #fff4db;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .viewer-modal__loader-text span:first-child {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      line-height: 1;
+      text-transform: none;
+    }
+
+    .viewer-modal__loader-text span:last-child {
+      color: rgba(255, 244, 219, 0.74);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+
+    .viewer-modal__stage iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #0f0f0f;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.85);
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: scale(1.65);
+        opacity: 0;
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .store {
+        min-height: 620px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .section-tag {
+        max-width: 36vw;
+        padding: 8px 10px;
+        font-size: 10px;
+        text-align: right;
+      }
+
+      .hotspot {
+        width: 44px;
+        height: 44px;
+        margin: -22px 0 0 -22px;
+      }
+
+      .viewer-modal {
+        padding: 0;
+      }
+
+      .viewer-modal__panel {
+        width: 100%;
+        height: 100svh;
+        max-height: none;
+        border: 0;
+      }
+
+      .viewer-modal__stage {
+        height: calc(100svh - 64px);
+        min-height: 0;
+      }
+
+      .intro__brand {
+        top: 20px;
+        left: 20px;
+      }
+    }
+  </style>
+</head>
+<body class="is-in-intro">
+  <section class="intro" id="introExperience" aria-label="Raymond Chairman Collection intro video">
+    <video class="intro__video" id="introVideo" autoplay muted playsinline preload="auto">
+      <source src="assets/intro.mp4" type="video/mp4">
+    </video>
+    <div class="intro__brand" aria-hidden="true">
+      <span>Raymond</span>
+      <span>Chairman Collection</span>
+    </div>
+    <button class="intro__enter" type="button" data-testid="enter-jewellery" aria-label="Enter jewellery collection" title="Jewellery Store">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M5 12h13"></path>
+        <path d="m13 6 6 6-6 6"></path>
+      </svg>
+      <span class="intro__enter-tip">Jewellery Store</span>
+      <span class="visually-hidden">Enter Jewellery Collection</span>
+    </button>
+  </section>
+
+  <main class="store" aria-label="Raymond Chairman Collection jewellery virtual store">
+    <img class="store__image" src="assets/jewellery.png" alt="Luxury jewellery section inside Raymond Chairman Collection">
+
+    <header class="topbar" aria-label="Store header">
+      <div class="brand">
+        <div class="brand__name">Raymond</div>
+        <div class="brand__collection">Chairman Collection</div>
+      </div>
+      <div class="section-tag">JEWELLERY COLLECTION</div>
+    </header>
+
+    <a class="hotspot" href="#viewerModal" data-testid="product-hotspot" aria-haspopup="dialog" aria-controls="viewerModal" aria-label="Open iJewel3D viewer">
+      <span class="hotspot__tooltip" role="tooltip">
+        <span class="hotspot__title">Diamond Solitaire Ring</span>
+        <span class="hotspot__eyebrow">Chairman Collection</span>
+        <span class="hotspot__copy">A polished white-metal band with a brilliant-cut centre stone, crafted for a refined ceremonial look.</span>
+      </span>
+      <span class="visually-hidden">Open iJewel3D viewer</span>
+    </a>
+  </main>
+
+  <section class="viewer-modal" id="viewerModal" role="dialog" aria-modal="true" aria-labelledby="viewerTitle" data-testid="viewer-modal">
+    <div class="viewer-modal__panel">
+      <div class="viewer-modal__bar">
+        <div class="viewer-modal__title" id="viewerTitle">
+          <span>Chairman Collection Jewel</span>
+          <span>iJewel3D viewer</span>
+        </div>
+        <a class="viewer-modal__close" href="#" role="button" data-testid="close-viewer" aria-label="Close viewer">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M6 6l12 12"></path>
+            <path d="M18 6L6 18"></path>
+          </svg>
+        </a>
+      </div>
+      <div class="viewer-modal__stage">
+        <div class="viewer-modal__loader" id="modalLoader" aria-live="polite">
+          <div class="viewer-modal__spinner" aria-hidden="true"></div>
+          <div class="viewer-modal__loader-text">
+            <span>Raymond Chairman Collection</span>
+            <span>Loading iJewel3D</span>
+          </div>
+        </div>
+        <iframe
+          id="ijewelFrame"
+          title="Raymond Chairman Collection iJewel3D viewer"
+          frameborder="0"
+          allowfullscreen
+          mozallowfullscreen="true"
+          webkitallowfullscreen="true"
+          xr-spatial-tracking
+          execution-while-out-of-viewport
+          execution-while-not-rendered
+          web-share
+          allow="autoplay; fullscreen; xr-spatial-tracking; web-share"
+          src="https://ijewel.design/embedded?isAutoplay=true&isPlayAnimations=false&isPlayCameraViews=false&isQuality=false&isRemoveLogo=true&isRemoveLogoLink=true&isShare=false&isTitle=false&isTurntableAnimation=true&slug=58bc3ec"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const intro = document.querySelector("#introExperience");
+    const introVideo = document.querySelector("#introVideo");
+    const enterJewelleryButton = document.querySelector("[data-testid='enter-jewellery']");
+    const hotspot = document.querySelector(".hotspot");
+    const modal = document.querySelector("#viewerModal");
+    const closeButton = document.querySelector(".viewer-modal__close");
+    const viewerFrame = document.querySelector("#ijewelFrame");
+    const modalLoader = document.querySelector("#modalLoader");
+    const defaultIjeweLEmbedSrc = "https://ijewel.design/embedded?isAutoplay=true&isPlayAnimations=false&isPlayCameraViews=false&isQuality=false&isRemoveLogo=true&isRemoveLogoLink=true&isShare=false&isTitle=false&isTurntableAnimation=true&slug=58bc3ec";
+    let modalLoaderStartedAt = 0;
+    let modalLoaderFallback = 0;
+
+    const params = new URLSearchParams(window.location.search);
+    const explicitEmbed = params.get("ijewel");
+    const driveModelId = params.get("modelId");
+    const baseName = params.get("baseName") || "drive";
+    const configuredEmbedSrc = explicitEmbed || (driveModelId
+      ? `ijewel-viewer.html?modelId=${encodeURIComponent(driveModelId)}&baseName=${encodeURIComponent(baseName)}`
+      : defaultIjeweLEmbedSrc);
+
+    function showEnterJewelleryButton() {
+      intro.classList.add("is-ended");
+    }
+
+    function enterJewellerySection() {
+      intro.classList.add("is-hidden");
+      document.body.classList.remove("is-in-intro");
+      introVideo.pause();
+      hotspot.focus({ preventScroll: true });
+    }
+
+    function setRandomHotspotPosition() {
+      const x = 42 + Math.random() * 18;
+      const y = 69 + Math.random() * 9;
+      hotspot.style.setProperty("--x", `${x.toFixed(2)}%`);
+      hotspot.style.setProperty("--y", `${y.toFixed(2)}%`);
+    }
+
+    function openViewer(event) {
+      event?.preventDefault();
+      window.clearTimeout(modalLoaderFallback);
+      modalLoaderStartedAt = performance.now();
+      modalLoader.classList.add("is-active");
+      viewerFrame.src = configuredEmbedSrc;
+      modalLoaderFallback = window.setTimeout(hideModalLoader, 2800);
+      modal.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      closeButton.focus({ preventScroll: true });
+    }
+
+    function hideModalLoader() {
+      const remaining = Math.max(0, 1200 - (performance.now() - modalLoaderStartedAt));
+      window.setTimeout(() => modalLoader.classList.remove("is-active"), remaining);
+    }
+
+    function closeViewer() {
+      window.clearTimeout(modalLoaderFallback);
+      modal.classList.remove("is-open");
+      modalLoader.classList.remove("is-active");
+      viewerFrame.removeAttribute("src");
+      document.body.style.overflow = "";
+      hotspot.focus({ preventScroll: true });
+    }
+
+    setRandomHotspotPosition();
+
+    introVideo.addEventListener("ended", showEnterJewelleryButton);
+    introVideo.addEventListener("error", showEnterJewelleryButton);
+    enterJewelleryButton.addEventListener("click", enterJewellerySection);
+
+    window.addEventListener("load", () => {
+      const playback = introVideo.play();
+      if (playback && typeof playback.catch === "function") {
+        playback.catch(showEnterJewelleryButton);
+      }
+    });
+
+    window.openIjeweLViewer = openViewer;
+    hotspot.onclick = openViewer;
+    hotspot.addEventListener("click", openViewer);
+    closeButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      closeViewer();
+    });
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeViewer();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        closeViewer();
+      }
+    });
+
+    window.addEventListener("message", (event) => {
+      if (event.origin === window.location.origin && event.data?.type === "raymond-ijewel-ready") {
+        hideModalLoader();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raymond Chairman Collection iJewel3D Viewer</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #10100f;
+      --ivory: #fff4db;
+      --champagne: #e6c77e;
+      --emerald: #173b36;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body,
+    #root {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--ivory);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    #root {
+      position: relative;
+      z-index: 1;
+    }
+
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      gap: 18px;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(230, 199, 126, 0.14), transparent 28%),
+        linear-gradient(135deg, #19110f, var(--emerald));
+      transition: opacity 260ms ease, visibility 260ms ease;
+    }
+
+    .loader.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader__mark {
+      width: 58px;
+      height: 58px;
+      border: 2px solid rgba(255, 244, 219, 0.24);
+      border-top-color: var(--champagne);
+      border-radius: 50%;
+      animation: spin 900ms linear infinite;
+    }
+
+    .loader__text {
+      display: grid;
+      gap: 6px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .loader__text span:first-child {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      line-height: 1;
+      text-transform: none;
+    }
+
+    .loader__text span:last-child {
+      color: rgba(255, 244, 219, 0.74);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <div class="loader" id="viewerLoader" aria-live="polite">
+    <div class="loader__mark" aria-hidden="true"></div>
+    <div class="loader__text">
+      <span>Raymond Chairman Collection</span>
+      <span>Loading iJewel3D</span>
+    </div>
+  </div>
+
+  <script src="https://releases.ijewel3d.com/libs/webgi-v0/bundle-0.22.0.js"></script>
+  <script src="https://releases.ijewel3d.com/libs/mini-viewer/0.6.8/bundle.nowebgi.iife.js"></script>
+  <script>
+    const loader = document.querySelector("#viewerLoader");
+    const params = new URLSearchParams(window.location.search);
+    const root = document.getElementById("root");
+    const modelUrl = params.get("modelUrl") || "assets/carat01.glb";
+    const modelId = params.get("modelId");
+    const baseName = params.get("baseName") || "drive";
+    const loaderStartedAt = performance.now();
+
+    const project = {
+      modelUrl,
+      basePath: "",
+      name: "Chairman Collection Jewel",
+      description: "Raymond Chairman Collection",
+      category: "Ring",
+      tags: ["Raymond", "Chairman Collection", "Jewellery"],
+    };
+
+    const viewerOptions = {
+      showCard: false,
+      showLogo: false,
+      showUiButtons: true,
+      showConfigurator: false,
+      showPosterInLoadingScreen: false,
+      disableInteractionPrompt: true,
+      runRotateCamera: true,
+      isModal: true,
+    };
+
+    function hideLoader() {
+      const remaining = Math.max(0, 1200 - (performance.now() - loaderStartedAt));
+      window.setTimeout(() => loader.classList.add("is-hidden"), remaining);
+    }
+
+    function showError(message) {
+      loader.querySelector(".loader__mark").style.animation = "none";
+      loader.querySelector(".loader__mark").style.borderTopColor = "#f0a38f";
+      loader.querySelector(".loader__text span:last-child").textContent = message;
+    }
+
+    window.addEventListener("ijewel-viewer-ready", () => {
+      window.parent.postMessage({ type: "raymond-ijewel-ready" }, window.location.origin);
+      window.setTimeout(hideLoader, 450);
+    });
+
+    window.addEventListener("error", () => {
+      showError("Viewer script blocked");
+    });
+
+    try {
+      if (modelId) {
+        ijewelViewer.loadModelById(modelId, baseName, root, viewerOptions);
+      } else {
+        new ijewelViewer.Viewer(root, project, viewerOptions);
+      }
+    } catch (error) {
+      showError("Viewer could not start");
+    }
+  </script>
+</body>
+</html>
