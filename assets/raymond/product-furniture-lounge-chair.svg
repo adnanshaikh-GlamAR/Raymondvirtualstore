@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Chairman Lounge Chair product placeholder</title>
+  <desc id="desc">A premium lounge chair placeholder illustration.</desc>
+  <rect width="900" height="900" fill="#F8F5EF"/>
+  <ellipse cx="458" cy="752" rx="290" ry="50" fill="#171717" opacity=".12"/>
+  <path d="M260 565c-38-185 44-314 246-388 126 76 171 189 136 338z" fill="#0B0B0A"/>
+  <path d="M232 548h472c48 0 86 38 86 86v58H158v-96c0-27 25-48 74-48z" fill="#171717"/>
+  <path d="M256 690l-72 158M690 690l78 158" stroke="#8E836F" stroke-width="26" stroke-linecap="round"/>
+  <path d="M394 238c74 78 88 168 43 270" fill="none" stroke="#C8A24A" stroke-width="12" stroke-linecap="round"/>
+  <path d="M336 558h292" stroke="#F1E3B5" stroke-width="10" stroke-linecap="round" opacity=".8"/>
+</svg>

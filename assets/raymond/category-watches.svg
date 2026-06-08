@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Watches category premium storefront scene</title>
+  <desc id="desc">A warm luxury watch gallery with illuminated vitrines and timepieces.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#efe3d2"/>
+      <stop offset="0.62" stop-color="#c29b68"/>
+      <stop offset="1" stop-color="#5f371b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="34%" r="58%">
+      <stop offset="0" stop-color="#fff5d0" stop-opacity="0.82"/>
+      <stop offset="0.58" stop-color="#dfb46a" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#090706" stop-opacity="0.4"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#140d08" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#wall)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <path d="M0 704h1600v196H0z" fill="#dfd0b9"/>
+  <path d="M0 732h1600" stroke="#7b542f" stroke-width="8" opacity="0.42"/>
+  <rect x="280" y="96" width="1120" height="602" rx="26" fill="#3a2415" filter="url(#shadow)"/>
+  <rect x="338" y="144" width="1004" height="508" rx="18" fill="#f9ead0" opacity="0.18"/>
+  <g opacity="0.88">
+    <rect x="402" y="200" width="254" height="172" rx="20" fill="#e9d3ad" opacity="0.22"/>
+    <rect x="722" y="200" width="254" height="172" rx="20" fill="#e9d3ad" opacity="0.22"/>
+    <rect x="1042" y="200" width="254" height="172" rx="20" fill="#e9d3ad" opacity="0.22"/>
+    <rect x="402" y="442" width="254" height="172" rx="20" fill="#e9d3ad" opacity="0.2"/>
+    <rect x="722" y="442" width="254" height="172" rx="20" fill="#e9d3ad" opacity="0.2"/>
+    <rect x="1042" y="442" width="254" height="172" rx="20" fill="#e9d3ad" opacity="0.2"/>
+  </g>
+  <g stroke="#e8c568" stroke-width="9" fill="none" filter="url(#shadow)">
+    <circle cx="530" cy="286" r="48"/>
+    <circle cx="850" cy="286" r="58"/>
+    <circle cx="1170" cy="286" r="48"/>
+    <circle cx="530" cy="528" r="50"/>
+    <circle cx="850" cy="528" r="46"/>
+    <circle cx="1170" cy="528" r="56"/>
+  </g>
+  <g stroke="#fff4c9" stroke-width="8" stroke-linecap="round" opacity="0.9">
+    <path d="M530 286v-26M530 286l24 18"/>
+    <path d="M850 286v-34M850 286l30 18"/>
+    <path d="M1170 286v-28M1170 286l-24 20"/>
+    <path d="M530 528v-30M530 528l22-18"/>
+    <path d="M850 528v-26M850 528l25 16"/>
+    <path d="M1170 528v-36M1170 528l-28 18"/>
+  </g>
+  <g opacity="0.58" fill="#fff1c4">
+    <rect x="422" y="164" width="188" height="10" rx="5"/>
+    <rect x="738" y="164" width="188" height="10" rx="5"/>
+    <rect x="1058" y="164" width="188" height="10" rx="5"/>
+  </g>
+</svg>

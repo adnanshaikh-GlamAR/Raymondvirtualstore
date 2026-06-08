@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Chairman Heritage Oxford Shoes product placeholder</title>
+  <desc id="desc">A pair of polished oxford shoes placeholder illustration.</desc>
+  <rect width="900" height="900" fill="#F8F5EF"/>
+  <ellipse cx="456" cy="710" rx="310" ry="56" fill="#171717" opacity=".12"/>
+  <g transform="translate(120 310)">
+    <path d="M20 250c130 18 233-24 312-126 37 83 112 126 226 126 48 0 78 28 78 62 0 38-28 60-86 60H120c-72 0-112-42-120-126z" fill="#171717"/>
+    <path d="M296 136c-38 96-108 156-208 180" fill="none" stroke="#C8A24A" stroke-width="15" stroke-linecap="round"/>
+    <path d="M250 204h136M232 250h170M212 294h190" stroke="#F1E3B5" stroke-width="12" stroke-linecap="round" opacity=".75"/>
+  </g>
+  <g transform="translate(310 220)" opacity=".92">
+    <path d="M20 250c130 18 233-24 312-126 37 83 112 126 226 126 48 0 78 28 78 62 0 38-28 60-86 60H120c-72 0-112-42-120-126z" fill="#593017"/>
+    <path d="M246 214h146M230 260h160" stroke="#C8A24A" stroke-width="12" stroke-linecap="round"/>
+  </g>
+</svg>

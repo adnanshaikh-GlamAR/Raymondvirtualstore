@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Chairman Automatic Watch</title>
+  <desc id="desc">A black and gold luxury wristwatch with a leather strap.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="48%" r="64%">
+      <stop offset="0" stop-color="#fff5d2"/>
+      <stop offset="0.56" stop-color="#e0bd78"/>
+      <stop offset="1" stop-color="#76502c"/>
+    </radialGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="28" stdDeviation="24" flood-color="#120b07" flood-opacity="0.26"/>
+    </filter>
+  </defs>
+  <rect width="900" height="900" fill="url(#bg)"/>
+  <ellipse cx="450" cy="700" rx="230" ry="48" fill="#2b160c" opacity="0.2"/>
+  <g filter="url(#shadow)">
+    <path d="M384 124h132l-24 252H408z" fill="#16110f"/>
+    <path d="M408 524h84l24 252H384z" fill="#16110f"/>
+    <circle cx="450" cy="450" r="178" fill="#090807" stroke="#e8c568" stroke-width="28"/>
+    <circle cx="450" cy="450" r="130" fill="#16120f" stroke="#fff1c4" stroke-width="6" opacity="0.94"/>
+    <circle cx="450" cy="450" r="12" fill="#e8c568"/>
+    <path d="M450 450V344" stroke="#fff4cf" stroke-width="12" stroke-linecap="round"/>
+    <path d="M450 450l82 52" stroke="#e8c568" stroke-width="12" stroke-linecap="round"/>
+    <path d="M450 450l-58 74" stroke="#fff4cf" stroke-width="8" stroke-linecap="round" opacity="0.78"/>
+    <g fill="#fff1c4">
+      <rect x="444" y="334" width="12" height="28" rx="6"/>
+      <rect x="444" y="598" width="12" height="28" rx="6"/>
+      <rect x="582" y="444" width="28" height="12" rx="6"/>
+      <rect x="310" y="444" width="28" height="12" rx="6"/>
+    </g>
+  </g>
+</svg>

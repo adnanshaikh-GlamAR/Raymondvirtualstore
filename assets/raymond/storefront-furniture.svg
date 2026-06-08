@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Furniture category premium storefront scene</title>
+  <desc id="desc">A quiet lounge showroom with a premium lounge chair display.</desc>
+  <rect width="1600" height="1000" fill="#F8F5EF"/>
+  <rect y="660" width="1600" height="340" fill="#D9D4C8"/>
+  <rect x="126" y="110" width="1320" height="650" rx="32" fill="#fff" stroke="#D9D4C8" stroke-width="4"/>
+  <text x="662" y="188" fill="#0B0B0A" font-family="Georgia, serif" font-size="42">Furniture</text>
+  <rect x="250" y="300" width="420" height="300" rx="20" fill="#F2F2F2"/>
+  <rect x="875" y="260" width="360" height="430" rx="22" fill="#F2F2F2"/>
+  <g transform="translate(910 350)">
+    <path d="M84 220c-25-115 24-190 146-224 72 42 99 108 82 198z" fill="#0B0B0A"/>
+    <path d="M64 218h280c30 0 54 24 54 54v34H20v-62c0-14 14-26 44-26z" fill="#171717"/>
+    <path d="M74 306l-48 98M326 306l58 98" stroke="#8E836F" stroke-width="18" stroke-linecap="round"/>
+    <path d="M142 38c44 52 51 106 22 162" fill="none" stroke="#C8A24A" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(312 390)">
+    <rect width="260" height="98" rx="18" fill="#0B0B0A"/>
+    <rect x="50" y="106" width="160" height="112" rx="14" fill="#C8A24A"/>
+  </g>
+  <rect x="280" y="784" width="380" height="18" rx="9" fill="#0B0B0A"/>
+  <rect x="910" y="784" width="360" height="18" rx="9" fill="#C8A24A"/>
+</svg>

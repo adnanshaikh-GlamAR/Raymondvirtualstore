@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Shoes category premium storefront scene</title>
+  <desc id="desc">A refined shoe showroom with shelves and oxford shoes on plinths.</desc>
+  <rect width="1600" height="1000" fill="#F8F5EF"/>
+  <rect y="708" width="1600" height="292" fill="#CFC6B7"/>
+  <rect x="170" y="132" width="1210" height="610" rx="28" fill="#0B0B0A"/>
+  <rect x="220" y="195" width="1110" height="460" rx="20" fill="#F8F5EF"/>
+  <text x="704" y="174" fill="#F1E3B5" font-family="Georgia, serif" font-size="42">Shoes</text>
+  <g stroke="#D9D4C8" stroke-width="5">
+    <path d="M270 330h980M270 510h980"/>
+  </g>
+  <g transform="translate(330 265)">
+    <rect y="270" width="260" height="64" rx="12" fill="#fff"/>
+    <path d="M24 208c76 18 129 0 172-64 15 59 62 89 142 89 15 0 30 12 30 28 0 16-13 29-30 29H62c-46 0-76-29-86-72z" fill="#171717"/>
+    <path d="M185 152c-18 48-55 80-110 94" fill="none" stroke="#C8A24A" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(780 265)">
+    <rect y="270" width="260" height="64" rx="12" fill="#fff"/>
+    <path d="M22 214c64 9 115-7 153-49 25 46 68 70 129 70 24 0 42 14 42 32 0 19-15 31-43 31H56c-35 0-57-23-64-72z" fill="#5C321B"/>
+    <path d="M128 196h66M118 225h90" stroke="#C8A24A" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <rect x="284" y="762" width="430" height="18" rx="9" fill="#0B0B0A"/>
+  <rect x="840" y="762" width="310" height="18" rx="9" fill="#C8A24A"/>
+</svg>

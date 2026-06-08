@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Chairman Signature Jewellery product placeholder</title>
+  <desc id="desc">A black and gold signature ring placeholder illustration.</desc>
+  <defs>
+    <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#F6E7B6"/>
+      <stop offset=".38" stop-color="#D8B65B"/>
+      <stop offset=".72" stop-color="#A47822"/>
+      <stop offset="1" stop-color="#F3D37A"/>
+    </linearGradient>
+    <radialGradient id="stone" cx=".35" cy=".25" r=".75">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".45" stop-color="#E7EEF0"/>
+      <stop offset="1" stop-color="#AEBBC0"/>
+    </radialGradient>
+  </defs>
+  <rect width="900" height="900" fill="#F2F2F2"/>
+  <ellipse cx="450" cy="758" rx="280" ry="52" fill="#11100E" opacity=".12"/>
+  <circle cx="450" cy="474" r="238" fill="none" stroke="url(#gold)" stroke-width="58"/>
+  <path d="M260 470c96 92 286 94 396 0" fill="none" stroke="#F6E7B6" stroke-width="11" stroke-linecap="round" opacity=".68"/>
+  <g transform="translate(333 174)">
+    <path d="M117 0l116 96-45 152H46L0 96z" fill="url(#stone)" stroke="#C8A24A" stroke-width="14" stroke-linejoin="round"/>
+    <path d="M0 96h233M46 248L117 0l71 248M46 248L0 96 117 0 233 96 188 248" fill="none" stroke="#fff" stroke-width="8" opacity=".72"/>
+    <circle cx="14" cy="118" r="18" fill="url(#gold)"/>
+    <circle cx="219" cy="118" r="18" fill="url(#gold)"/>
+  </g>
+</svg>
